@@ -62,13 +62,6 @@ class _StatsTabState extends ConsumerState<StatsTab> {
     _dateText4 = 'date';
     _dateText5 = 'date';
     _dateText6 = 'date';
-    sunClr = sunClr;
-    monClr = monClr;
-    tueClr = tueClr;
-    wedClr = wedClr;
-    thuClr = thuClr;
-    friClr = friClr;
-    satClr = satClr;
     headerWidth = 100;
     cellWidth = 40;
     super.initState();
@@ -174,25 +167,25 @@ class _StatsTabState extends ConsumerState<StatsTab> {
                                 .toString();
                             _viewHeaderText = DateFormat('EEE')
                                 .format(viewChangedDetails.visibleDates[0])
-                                .toString();
+                                .toString().substring(0, 1);
                             _viewHeaderText1 = DateFormat('EEE')
                                 .format(viewChangedDetails.visibleDates[1])
-                                .toString();
+                                .toString().substring(0, 1);
                             _viewHeaderText2 = DateFormat('EEE')
                                 .format(viewChangedDetails.visibleDates[2])
-                                .toString();
+                                .toString().substring(0, 1);
                             _viewHeaderText3 = DateFormat('EEE')
                                 .format(viewChangedDetails.visibleDates[3])
-                                .toString();
+                                .toString().substring(0, 1);
                             _viewHeaderText4 = DateFormat('EEE')
                                 .format(viewChangedDetails.visibleDates[4])
-                                .toString();
+                                .toString().substring(0, 2);
                             _viewHeaderText5 = DateFormat('EEE')
                                 .format(viewChangedDetails.visibleDates[5])
-                                .toString();
+                                .toString().substring(0, 1);
                             _viewHeaderText6 = DateFormat('EEE')
                                 .format(viewChangedDetails.visibleDates[6])
-                                .toString();
+                                .toString().substring(0, 2);
                             _dateText = DateFormat('dd')
                                 .format(viewChangedDetails.visibleDates[0])
                                 .toString();

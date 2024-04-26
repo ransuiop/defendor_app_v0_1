@@ -76,12 +76,14 @@ class CalendarDays extends ConsumerWidget {
             ),
           ),
           CalendarHeaderDivider(),
-          Text(
-            _viewHeaderText3!,
-            textAlign: TextAlign.center,
-            style: themeState.isDarkModeEnabled
-                ? DTypography.defStydarkCalendarDays
-                : DTypography.defStylightCalendarDays,
+          Expanded(
+            child: Text(
+              _viewHeaderText3!,
+              textAlign: TextAlign.center,
+              style: themeState.isDarkModeEnabled
+                  ? DTypography.defStydarkCalendarDays
+                  : DTypography.defStylightCalendarDays,
+            ),
           ),
           CalendarHeaderDivider(),
           Expanded(
