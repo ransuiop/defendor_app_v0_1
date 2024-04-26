@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "585680400602",
+    "project_id": "initvideodatabase",
+    "storage_bucket": "initvideodatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585680400602:android:32b74065a1532bdeb335e3",
+        "android_client_info": {
+          "package_name": "com.example.defendor_app_v0_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWcmJL2VTL0Q5Bj8W2yL8bOQkIAh_gCOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
