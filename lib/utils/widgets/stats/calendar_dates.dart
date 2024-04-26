@@ -3,7 +3,9 @@
 import 'package:defendor_app_v0_1/modules/providers/theme_provider.dart';
 import 'package:defendor_app_v0_1/utils/constants.dart';
 import 'package:defendor_app_v0_1/utils/widgets/stats/calendar_header_divider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../theme/typography.dart';
@@ -55,131 +57,145 @@ class CalendarDates extends ConsumerWidget {
     final themeState = ref.read(appThemeStateNotifier);
 
     return Padding(
-      padding: EdgeInsets.only(left: reqLeftPadding),
+      padding: EdgeInsets.only(left: reqLeftPadding, right: reqLeftPadding),
       child: Row(
         children: [
-          Container(
-            width: cellWidth,
-            height: cellWidth,
-            decoration: BoxDecoration(
-              color: sunClr,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                _dateText!,
-                textAlign: TextAlign.center,
-                style: themeState.isDarkModeEnabled
-                    ? DTypography.defStydarkCalendarDates
-                    : DTypography.defStylightCalendarDates,
+          Expanded(
+            child: Container(
+              width: cellWidth,
+              height: cellWidth,
+              decoration: BoxDecoration(
+                color: sunClr,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  _dateText!,
+                  textAlign: TextAlign.center,
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkCalendarDates
+                      : DTypography.defStylightCalendarDates,
+                ),
               ),
             ),
           ),
           CalendarHeaderDivider(),
-          Container(
-            width: cellWidth,
-            height: cellWidth,
-            decoration: BoxDecoration(
-              color: monClr,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                _dateText1!,
-                textAlign: TextAlign.center,
-                style: themeState.isDarkModeEnabled
-                    ? DTypography.defStydarkCalendarDates
-                    : DTypography.defStylightCalendarDates,
+          Expanded(
+            child: Container(
+              width: cellWidth,
+              height: cellWidth,
+              decoration: BoxDecoration(
+                color: monClr,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  _dateText1!,
+                  textAlign: TextAlign.center,
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkCalendarDates
+                      : DTypography.defStylightCalendarDates,
+                ),
               ),
             ),
           ),
           CalendarHeaderDivider(),
-          Container(
-            width: cellWidth,
-            height: cellWidth,
-            decoration: BoxDecoration(
-              color: tueClr,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                _dateText2!,
-                textAlign: TextAlign.center,
-                style: themeState.isDarkModeEnabled
-                    ? DTypography.defStydarkCalendarDates
-                    : DTypography.defStylightCalendarDates,
+          Expanded(
+            child: Container(
+              width: cellWidth,
+              height: cellWidth,
+              decoration: BoxDecoration(
+                color: tueClr,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  _dateText2!,
+                  textAlign: TextAlign.center,
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkCalendarDates
+                      : DTypography.defStylightCalendarDates,
+                ),
               ),
             ),
           ),
           CalendarHeaderDivider(),
-          Container(
-            width: cellWidth,
-            height: cellWidth,
-            decoration: BoxDecoration(
-              color: wedClr,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                _dateText3!,
-                textAlign: TextAlign.center,
-                style: themeState.isDarkModeEnabled
-                    ? DTypography.defStydarkCalendarDates
-                    : DTypography.defStylightCalendarDates,
+          Expanded(
+            child: Container(
+              width: cellWidth,
+              height: cellWidth,
+              decoration: BoxDecoration(
+                color: wedClr,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  _dateText3!,
+                  textAlign: TextAlign.center,
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkCalendarDates
+                      : DTypography.defStylightCalendarDates,
+                ),
               ),
             ),
           ),
           CalendarHeaderDivider(),
-          Container(
-            width: cellWidth,
-            height: cellWidth,
-            decoration: BoxDecoration(
-              color: thuClr,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                _dateText4!,
-                textAlign: TextAlign.center,
-                style: themeState.isDarkModeEnabled
-                    ? DTypography.defStydarkCalendarDates
-                    : DTypography.defStylightCalendarDates,
+          Expanded(
+            child: Container(
+              width: cellWidth,
+              height: cellWidth,
+              decoration: BoxDecoration(
+                color: thuClr,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  _dateText4!,
+                  textAlign: TextAlign.center,
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkCalendarDates
+                      : DTypography.defStylightCalendarDates,
+                ),
               ),
             ),
           ),
           CalendarHeaderDivider(),
-          Container(
-            width: cellWidth,
-            height: cellWidth,
-            decoration: BoxDecoration(
-              color: friClr,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                _dateText5!,
-                textAlign: TextAlign.center,
-                style: themeState.isDarkModeEnabled
-                    ? DTypography.defStydarkCalendarDates
-                    : DTypography.defStylightCalendarDates,
+          Expanded(
+            child: Container(
+              width: cellWidth,
+              height: cellWidth,
+              decoration: BoxDecoration(
+                color: friClr,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  _dateText5!,
+                  textAlign: TextAlign.center,
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkCalendarDates
+                      : DTypography.defStylightCalendarDates,
+                ),
               ),
             ),
           ),
           CalendarHeaderDivider(),
-          Container(
-            width: cellWidth,
-            height: cellWidth,
-            decoration: BoxDecoration(
-              color: satClr,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                _dateText6!,
-                textAlign: TextAlign.center,
-                style: themeState.isDarkModeEnabled
-                    ? DTypography.defStydarkCalendarDates
-                    : DTypography.defStylightCalendarDates,
+          Expanded(
+            child: Container(
+              width: cellWidth,
+              height: cellWidth,
+              decoration: BoxDecoration(
+                color: satClr,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  _dateText6!,
+                  textAlign: TextAlign.center,
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkCalendarDates
+                      : DTypography.defStylightCalendarDates,
+                ),
               ),
             ),
           ),
