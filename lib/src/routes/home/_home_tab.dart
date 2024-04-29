@@ -2,9 +2,10 @@
 
 import 'package:defendor_app_v0_1/modules/providers/theme_provider.dart';
 import 'package:defendor_app_v0_1/utils/theme/typography.dart';
-import 'package:defendor_app_v0_1/utils/widgets/omni/omni_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../utils/widgets/omni/home_app_bar.dart';
 
 class HomeTab extends ConsumerWidget {
   const HomeTab({super.key});
@@ -27,7 +28,7 @@ class HomeTab extends ConsumerWidget {
     final themeState = ref.read(appThemeStateNotifier);
 
     return Scaffold(
-      appBar: DOmniAppBar(tabName: "Home"),
+      appBar: DHomeAppBar(tabName: "Home"),
       body: ListView.separated(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         scrollDirection: Axis.vertical,

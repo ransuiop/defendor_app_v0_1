@@ -81,7 +81,7 @@ dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/defendorLogo.png"
+  image_path: "assets/images/_Logo/defendorIcon.png"
 
 flutter_native_splash:
   # This package generates native code to customize Flutter's default white native splash screen
@@ -99,7 +99,7 @@ flutter_native_splash:
   # of your splash screen to a solid color.  Use background_image to set the background of your
   # splash screen to a png image.  This is useful for gradients. The image will be stretch to the
   # size of the app. Only one parameter can be used, color and background_image cannot both be set.
-  color: "#4f5d75"
+  color: "#ffffff"
   #background_image: "assets/background.png"
 
   # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing
@@ -139,10 +139,13 @@ flutter_native_splash:
     # 640 pixels in diameter.
     # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
     # 768 pixels in diameter.
-    image: assets/images/defendorLogo.png
+    image: assets/images/_Logo/defendorLogo.png
 
     # Splash screen background color.
-    color: "#4f5d75"
+    color: "#ffffff"
+
+    # DO NOT FORGET TO RUN THIS AFTER MODIFYING LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+    # dart run flutter_native_splash:create
 
     # App icon background color.
     #icon_background_color: "#111111"
@@ -261,16 +264,17 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/videos/sorry.mp4
-    - assets/images/brainstorm.png
-    - assets/images/defendorLogo.png
-    - assets/images/pvzdeepfried.jpg
-    - assets/images/result.png
+
+    - assets/images/_Logo/defendorLogo.png
+    - assets/images/_Logo/defendorIcon.png
+
     - assets/images/Punch/LPunch.png
     - assets/images/Kick/LKick.png
     - assets/images/Block/LBlock.png
     - assets/images/Punch/DPunch.png
     - assets/images/Kick/DKick.png
     - assets/images/Block/DBlock.png
+    
     - assets/images/previewLightTheme.png
     - assets/images/previewDarkTheme.png
 

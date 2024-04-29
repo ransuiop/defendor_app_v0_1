@@ -3,12 +3,12 @@
 import 'package:defendor_app_v0_1/modules/providers/theme_provider.dart';
 import 'package:defendor_app_v0_1/utils/constants.dart';
 import 'package:defendor_app_v0_1/utils/theme/typography.dart';
-import 'package:defendor_app_v0_1/utils/widgets/omni/omni_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../../utils/widgets/omni/home_app_bar.dart';
 import '../../../utils/widgets/stats/calendar_dates.dart';
 import '../../../utils/widgets/stats/calendar_days.dart';
 import '../../../utils/widgets/stats/calendar_header_month.dart';
@@ -60,7 +60,7 @@ class _StatsTabState extends ConsumerState<StatsTab> {
     Color satClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
 
     return Scaffold(
-      appBar: DOmniAppBar(tabName: 'Statistics'),
+      appBar: DHomeAppBar(tabName: 'Statistics'),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,

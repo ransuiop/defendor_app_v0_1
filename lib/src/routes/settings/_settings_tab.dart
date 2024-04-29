@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:defendor_app_v0_1/utils/widgets/omni/omni_app_bar.dart';
+
+import '../../../utils/widgets/omni/home_app_bar.dart';
 
 class SettingsTab extends StatelessWidget {
   const SettingsTab({super.key});
@@ -29,7 +30,7 @@ class SettingsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DOmniAppBar(tabName: "Settings"),
+      appBar: DHomeAppBar(tabName: "Settings"),
       body: SafeArea(
         child: SingleChildScrollView(
             scrollDirection: Axis.vertical,

@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../modules/providers/theme_provider.dart';
 
-class DOmniAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const DOmniAppBar({super.key, required this.tabName});
+class DHomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
+  const DHomeAppBar({super.key, required this.tabName});
   final String tabName;
 
   @override
@@ -20,6 +20,13 @@ class DOmniAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
     return AppBar(
       foregroundColor: defWht,
+      title: Row(
+        children: [
+          Text(
+            "DEFENDOR",
+          ),
+        ],
+      ),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(30),
         child: SizedBox(
