@@ -42,44 +42,47 @@ class _BuildTrainingTabState extends State<BuildTrainingTab> {
   @override
   Widget build(BuildContext context) {
     return _controller.value.isInitialized
-        ? Stack(
-            fit: StackFit.loose,
-            clipBehavior: Clip.none,
-            alignment: AlignmentDirectional.center,
-            children: [
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: AspectRatio(
-                    aspectRatio: 1.0 / 1.0,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(6),
-                        child: VideoPlayer(_controller)),
+        ? SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Stack(
+              fit: StackFit.loose,
+              clipBehavior: Clip.none,
+              alignment: AlignmentDirectional.center,
+              children: [
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: AspectRatio(
+                      aspectRatio: 1.0 / 1.0,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: VideoPlayer(_controller)),
+                    ),
                   ),
-                ),
-                VideoProgressIndicator(_controller,
-                    allowScrubbing: true,
-                    colors: VideoProgressColors(playedColor: defLBlu),
-                    padding: EdgeInsets.fromLTRB(16, 410, 16, 0)),
-                Positioned(
-                  top: 330,
-                  left: 330,
-                  child: FloatingActionButton(
-                    backgroundColor: defBBlu,
-                    shape: CircleBorder(),
-                    onPressed: () {
-                      setState(() {
-                        _controller.value.isPlaying
-                            ? _controller.pause()
-                            : _controller.play();
-                      });
-                    },
-                    // Display the correct icon depending on the state of the player.
-                    child: Icon(_controller.value.isPlaying
-                        ? Icons.pause
-                        : Icons.play_arrow),
+                  VideoProgressIndicator(_controller,
+                      allowScrubbing: true,
+                      colors: VideoProgressColors(playedColor: defLBlu),
+                      padding: EdgeInsets.fromLTRB(16, 410, 16, 0)),
+                  Positioned(
+                    top: 330,
+                    left: 330,
+                    child: FloatingActionButton(
+                      backgroundColor: defBBlu,
+                      shape: CircleBorder(),
+                      onPressed: () {
+                        setState(() {
+                          _controller.value.isPlaying
+                              ? _controller.pause()
+                              : _controller.play();
+                        });
+                      },
+                      // Display the correct icon depending on the state of the player.
+                      child: Icon(_controller.value.isPlaying
+                          ? Icons.pause
+                          : Icons.play_arrow),
+                    ),
                   ),
-                ),
-              ])
+                ]),
+        )
         // If the VideoPlayerController has finished initialization, use
         // the data it provides to limit the aspect ratio of the video.
     

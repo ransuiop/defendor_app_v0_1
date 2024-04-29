@@ -25,7 +25,7 @@ class CalendarHeaderMonth extends ConsumerWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
         width: headerWidth,
         child: Text(
-          _headerText!,
+          _headerText ?? '',
           textAlign: TextAlign.center,
           style: themeState.isDarkModeEnabled
               ? DTypography.defStydarkCalendarMonth

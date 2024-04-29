@@ -70,7 +70,7 @@ class CalendarDates extends ConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  _dateText!,
+                  _dateText ?? '',
                   textAlign: TextAlign.center,
                   style: themeState.isDarkModeEnabled
                       ? DTypography.defStydarkCalendarDates
@@ -90,7 +90,7 @@ class CalendarDates extends ConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  _dateText1!,
+                  _dateText1  ?? '',
                   textAlign: TextAlign.center,
                   style: themeState.isDarkModeEnabled
                       ? DTypography.defStydarkCalendarDates
@@ -110,7 +110,7 @@ class CalendarDates extends ConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  _dateText2!,
+                  _dateText2  ?? '',
                   textAlign: TextAlign.center,
                   style: themeState.isDarkModeEnabled
                       ? DTypography.defStydarkCalendarDates
@@ -130,7 +130,7 @@ class CalendarDates extends ConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  _dateText3!,
+                  _dateText3  ?? '',
                   textAlign: TextAlign.center,
                   style: themeState.isDarkModeEnabled
                       ? DTypography.defStydarkCalendarDates
@@ -150,7 +150,7 @@ class CalendarDates extends ConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  _dateText4!,
+                  _dateText4  ?? '',
                   textAlign: TextAlign.center,
                   style: themeState.isDarkModeEnabled
                       ? DTypography.defStydarkCalendarDates
@@ -170,7 +170,7 @@ class CalendarDates extends ConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  _dateText5!,
+                  _dateText5  ?? '',
                   textAlign: TextAlign.center,
                   style: themeState.isDarkModeEnabled
                       ? DTypography.defStydarkCalendarDates
@@ -190,7 +190,7 @@ class CalendarDates extends ConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  _dateText6!,
+                  _dateText6  ?? '',
                   textAlign: TextAlign.center,
                   style: themeState.isDarkModeEnabled
                       ? DTypography.defStydarkCalendarDates

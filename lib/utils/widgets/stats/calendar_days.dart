@@ -48,7 +48,7 @@ class CalendarDays extends ConsumerWidget {
         children: [
           Expanded(
             child: Text(
-              _viewHeaderText!,
+              _viewHeaderText ?? '',
               textAlign: TextAlign.center,
               style: themeState.isDarkModeEnabled
                   ? DTypography.defStydarkCalendarDays
@@ -58,7 +58,7 @@ class CalendarDays extends ConsumerWidget {
           CalendarHeaderDivider(),
           Expanded(
             child: Text(
-              _viewHeaderText1!,
+              _viewHeaderText1 ?? '',
               textAlign: TextAlign.center,
               style: themeState.isDarkModeEnabled
                   ? DTypography.defStydarkCalendarDays
@@ -68,7 +68,7 @@ class CalendarDays extends ConsumerWidget {
           CalendarHeaderDivider(),
           Expanded(
             child: Text(
-              _viewHeaderText2!,
+              _viewHeaderText2 ?? '',
               textAlign: TextAlign.center,
               style: themeState.isDarkModeEnabled
                   ? DTypography.defStydarkCalendarDays
@@ -78,7 +78,7 @@ class CalendarDays extends ConsumerWidget {
           CalendarHeaderDivider(),
           Expanded(
             child: Text(
-              _viewHeaderText3!,
+              _viewHeaderText3 ?? '',
               textAlign: TextAlign.center,
               style: themeState.isDarkModeEnabled
                   ? DTypography.defStydarkCalendarDays
@@ -88,7 +88,7 @@ class CalendarDays extends ConsumerWidget {
           CalendarHeaderDivider(),
           Expanded(
             child: Text(
-              _viewHeaderText4!,
+              _viewHeaderText4 ?? '',
               textAlign: TextAlign.center,
               style: themeState.isDarkModeEnabled
                   ? DTypography.defStydarkCalendarDays
@@ -98,7 +98,7 @@ class CalendarDays extends ConsumerWidget {
           CalendarHeaderDivider(),
           Expanded(
             child: Text(
-              _viewHeaderText5!,
+              _viewHeaderText5 ?? '',
               textAlign: TextAlign.center,
               style: themeState.isDarkModeEnabled
                   ? DTypography.defStydarkCalendarDays
@@ -108,7 +108,7 @@ class CalendarDays extends ConsumerWidget {
           CalendarHeaderDivider(),
           Expanded(
             child: Text(
-              _viewHeaderText6!,
+              _viewHeaderText6 ?? '',
               textAlign: TextAlign.center,
               style: themeState.isDarkModeEnabled
                   ? DTypography.defStydarkCalendarDays

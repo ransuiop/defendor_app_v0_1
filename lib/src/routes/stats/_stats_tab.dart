@@ -41,42 +41,23 @@ class _StatsTabState extends ConsumerState<StatsTab> {
   String? date;
   double? headerWidth, cellWidth;
   Icon? icon1, icon2, icon3, icon4, icon5, icon6, icon7;
-  Color? sunClr, monClr, tueClr, wedClr, thuClr, friClr, satClr;
   DateTime dateToday = DateTime.now();
   DateFormat formatter = DateFormat('EEE');
 
   @override
-  void initState() {
-    _headerText = 'header';
-    _viewHeaderText = 'viewheader';
-    _viewHeaderText1 = 'viewheader';
-    _viewHeaderText2 = 'viewheader';
-    _viewHeaderText3 = 'viewheader';
-    _viewHeaderText4 = 'viewheader';
-    _viewHeaderText5 = 'viewheader';
-    _viewHeaderText6 = 'viewheader';
-    _dateText = 'date';
-    _dateText1 = 'date';
-    _dateText2 = 'date';
-    _dateText3 = 'date';
-    _dateText4 = 'date';
-    _dateText5 = 'date';
-    _dateText6 = 'date';
-    headerWidth = 100;
-    cellWidth = 40;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final themeState = ref.read(appThemeStateNotifier);
-    sunClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
-    monClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
-    tueClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
-    wedClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
-    thuClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
-    friClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
-    satClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
+
+    headerWidth = 100;
+    cellWidth = 40;
+
+    Color sunClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
+    Color monClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
+    Color tueClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
+    Color wedClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
+    Color thuClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
+    Color friClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
+    Color satClr = themeState.isDarkModeEnabled ? defGry : defDBlu;
 
     return Scaffold(
       appBar: DOmniAppBar(tabName: 'Statistics'),
