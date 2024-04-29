@@ -4,14 +4,17 @@ import 'package:defendor_app_v0_1/utils/widgets/learning/build_training_tab.dart
 import 'package:defendor_app_v0_1/utils/widgets/omni/omni_app_bar.dart';
 import 'package:defendor_app_v0_1/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../modules/providers/theme_provider.dart';
 import '../../../../utils/theme/typography.dart';
 
-class BTraining1 extends StatelessWidget {
+class BTraining1 extends ConsumerWidget {
   const BTraining1({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeState = ref.read(appThemeStateNotifier);
     return Scaffold(
       appBar: DOmniAppBar(tabName: 'Learning: Blocking'),
       body: Column(
@@ -26,7 +29,9 @@ class BTraining1 extends StatelessWidget {
               child: Text(
                 "Training Name",
                 textAlign: TextAlign.left,
-                style: DTypography.defStylightTrainingName,
+                style: themeState.isDarkModeEnabled
+                    ? DTypography.defStydarkTrainingName
+                    : DTypography.defStylightTrainingName,
               ),
             ),
           ),
@@ -37,7 +42,9 @@ class BTraining1 extends StatelessWidget {
               child: Text(
                 lipsumText,
                 textAlign: TextAlign.justify,
-                style: DTypography.defStylightTrainingDesc,
+                style: themeState.isDarkModeEnabled
+                    ? DTypography.defStydarkTrainingDesc
+                    : DTypography.defStylightTrainingDesc,
               ),
             ),
           ),
