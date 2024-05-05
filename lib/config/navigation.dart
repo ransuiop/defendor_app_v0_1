@@ -5,35 +5,37 @@
 // The tab that displays the "home" section of the app is HomeTab().
 // This is NAMED HomeNavView  because it is the navigation part of the HomeTab
 
-import 'package:defendor_app_v0_1/src/routes/home/1punch/p_training2.dart';
-import 'package:defendor_app_v0_1/src/routes/home/1punch/p_training3.dart';
-import 'package:defendor_app_v0_1/src/routes/home/2kick/k_training1.dart';
-import 'package:defendor_app_v0_1/src/routes/home/2kick/k_training2.dart';
-import 'package:defendor_app_v0_1/src/routes/home/2kick/k_training3.dart';
-import 'package:defendor_app_v0_1/src/routes/home/3block/b_training1.dart';
-import 'package:defendor_app_v0_1/src/routes/home/3block/b_training2.dart';
-import 'package:defendor_app_v0_1/src/routes/home/3block/b_training3.dart';
-import 'package:defendor_app_v0_1/src/routes/home/_home_tab.dart';
-import 'package:defendor_app_v0_1/src/routes/home/_learning_block_tab.dart';
-import 'package:defendor_app_v0_1/src/routes/home/_learning_kick_tab.dart';
-import 'package:defendor_app_v0_1/src/routes/home/_learning_punch_tab.dart';
-import 'package:defendor_app_v0_1/utils/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:motion_tab_bar/MotionTabBar.dart';
-
 import '../src/routes/onboarding/onboarding1.dart';
 import '../src/routes/onboarding/onboarding2.dart';
 import '../src/routes/onboarding/onboarding3.dart';
+import '../src/routes/home/learning/1punch/p_training2.dart';
+import '../src/routes/home/learning/1punch/p_training1.dart';
+import '../src/routes/home/learning/1punch/p_training3.dart';
+import '../src/routes/home/learning/2kick/k_training1.dart';
+import '../src/routes/home/learning/2kick/k_training2.dart';
+import '../src/routes/home/learning/2kick/k_training3.dart';
+import '../src/routes/home/learning/3block/b_training1.dart';
+import '../src/routes/home/learning/3block/b_training2.dart';
+import '../src/routes/home/learning/3block/b_training3.dart';
+import '../src/routes/home/_home_tab.dart';
+import '../src/routes/home/learning/_learning_block_tab.dart';
+import '../src/routes/home/learning/_learning_kick_tab.dart';
+import '../src/routes/home/learning/_learning_punch_tab.dart';
+import '../src/routes/home/learning/pose_detection_screen.dart';
+import '../src/routes/stats/_stats_tab.dart';
+import '../src/routes/stats/extended_calendar.dart';
 import '../src/routes/settings/_settings_tab.dart';
 import '../src/routes/settings/about_sett.dart';
 import '../src/routes/settings/book_sett.dart';
 import '../src/routes/settings/gen_sett.dart';
 import '../src/routes/settings/notif_sett_rem.dart';
 import '../src/routes/settings/notif_sett.dart';
-import '../src/routes/home/1punch/p_training1.dart';
-import '../src/routes/stats/_stats_tab.dart';
-import '../src/routes/stats/extended_calendar.dart';
+
+import '../utils/constants.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:motion_tab_bar/MotionTabBar.dart';
 
 class HomeNavView extends StatefulWidget {
   const HomeNavView({super.key});
@@ -82,67 +84,67 @@ class _HomeNavViewState extends State<HomeNavView> {
           ),
         ),
         bottomNavigationBar:
-        // NavigationBarTheme(
-        //   data: NavigationBarThemeData(
-        //     labelTextStyle: MaterialStateProperty.resolveWith(
-        //         (states) => states.contains(MaterialState.selected)
-        //             ? TextStyle(
-        //                 fontFamily: 'Metropolis',
-        //                 fontWeight: FontWeight.w400,
-        //                 color: strikeLiteClr,
-        //               )
-        //             : TextStyle(
-        //                 fontFamily: 'Metropolis',
-        //                 fontWeight: FontWeight.w400,
-        //                 color: Colors.grey,
-        //               )),
-        //       indicatorShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-        //   ),
-        //   child: NavigationBar(
-        //     labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-        //     backgroundColor: offbgClr,
-        //     indicatorColor: Colors.transparent,
-        //     onDestinationSelected: (int index) {
-        //       setState(() {
-        //         _selectedIndex = index;
-        //       });
-        //     },
-        //     selectedIndex: _selectedIndex,
-        //     destinations: [
-        //       NavigationDestination(
-        //           selectedIcon: Icon(
-        //             Icons.home,
-        //             color: strikeLiteClr,
-        //           ),
-        //           icon: Icon(
-        //             Icons.home_outlined,
-        //             color: Colors.grey,
-        //           ),
-        //           label: 'Learning'),
-        //       NavigationDestination(
-        //           selectedIcon: Icon(
-        //             Icons.pie_chart,
-        //             color: strikeLiteClr,
-        //           ),
-        //           icon: Icon(
-        //             Icons.pie_chart_outline,
-        //             color: Colors.grey,
-        //           ),
-        //           label: 'Stats'),
-        //       NavigationDestination(
-        //           selectedIcon: Icon(
-        //             Icons.settings,
-        //             color: strikeLiteClr,
-        //           ),
-        //           icon: Icon(
-        //             Icons.settings_outlined,
-        //             color: Colors.grey,
-        //           ),
-        //           label: 'Settings')
-        //     ],
-        //   ),
-        // ),
-        MotionTabBar(
+            // NavigationBarTheme(
+            //   data: NavigationBarThemeData(
+            //     labelTextStyle: MaterialStateProperty.resolveWith(
+            //         (states) => states.contains(MaterialState.selected)
+            //             ? TextStyle(
+            //                 fontFamily: 'Metropolis',
+            //                 fontWeight: FontWeight.w400,
+            //                 color: strikeLiteClr,
+            //               )
+            //             : TextStyle(
+            //                 fontFamily: 'Metropolis',
+            //                 fontWeight: FontWeight.w400,
+            //                 color: Colors.grey,
+            //               )),
+            //       indicatorShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+            //   ),
+            //   child: NavigationBar(
+            //     labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+            //     backgroundColor: offbgClr,
+            //     indicatorColor: Colors.transparent,
+            //     onDestinationSelected: (int index) {
+            //       setState(() {
+            //         _selectedIndex = index;
+            //       });
+            //     },
+            //     selectedIndex: _selectedIndex,
+            //     destinations: [
+            //       NavigationDestination(
+            //           selectedIcon: Icon(
+            //             Icons.home,
+            //             color: strikeLiteClr,
+            //           ),
+            //           icon: Icon(
+            //             Icons.home_outlined,
+            //             color: Colors.grey,
+            //           ),
+            //           label: 'Learning'),
+            //       NavigationDestination(
+            //           selectedIcon: Icon(
+            //             Icons.pie_chart,
+            //             color: strikeLiteClr,
+            //           ),
+            //           icon: Icon(
+            //             Icons.pie_chart_outline,
+            //             color: Colors.grey,
+            //           ),
+            //           label: 'Stats'),
+            //       NavigationDestination(
+            //           selectedIcon: Icon(
+            //             Icons.settings,
+            //             color: strikeLiteClr,
+            //           ),
+            //           icon: Icon(
+            //             Icons.settings_outlined,
+            //             color: Colors.grey,
+            //           ),
+            //           label: 'Settings')
+            //     ],
+            //   ),
+            // ),
+            MotionTabBar(
           initialSelectedTab: "Home",
           labels: ["Home", "Statistics", "Settings"],
           icons: [
@@ -225,6 +227,8 @@ class __HomeNavigatorState extends State<_HomeNavigator> {
                 return BTraining2();
               case '/bt3':
                 return BTraining3();
+              case '/camera':
+                return PoseDetectionScreen();
               default:
                 return HomeNavView();
             }

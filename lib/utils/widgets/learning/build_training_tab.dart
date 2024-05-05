@@ -3,7 +3,6 @@
 import 'package:defendor_app_v0_1/modules/providers/theme_provider.dart';
 import 'package:defendor_app_v0_1/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
 
@@ -78,8 +77,9 @@ class _BuildTrainingTabState extends ConsumerState<BuildTrainingTab> {
                         _controller,
                         allowScrubbing: true,
                         colors: VideoProgressColors(
-                            playedColor:
-                                themeState.isDarkModeEnabled ? defXWht : defLBlu),
+                            playedColor: themeState.isDarkModeEnabled
+                                ? defXWht
+                                : defLBlu),
                       ),
                     ],
                   ),
@@ -112,7 +112,7 @@ class _BuildTrainingTabState extends ConsumerState<BuildTrainingTab> {
                     child: FloatingActionButton(
                       backgroundColor: defBBlu,
                       shape: CircleBorder(),
-                      onPressed: () {},
+                      onPressed: () => Navigator.pushNamed(context, '/camera'),
                       child: Icon(Icons.camera),
                     ),
                   ),

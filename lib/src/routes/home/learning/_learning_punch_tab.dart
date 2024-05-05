@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:defendor_app_v0_1/utils/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../modules/providers/theme_provider.dart';
+import '../../../../modules/providers/theme_provider.dart';
 
 class LearningPunchTab extends ConsumerWidget {
   const LearningPunchTab({super.key});

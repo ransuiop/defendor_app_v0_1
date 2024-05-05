@@ -57,19 +57,18 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
 
   # calendar service
-  syncfusion_flutter_calendar: ^24.2.7
+  syncfusion_flutter_calendar: ^25.1.42
   intl: ^0.19.0           # internationalization
 
   # chart service
-  syncfusion_flutter_charts: ^24.2.7
+  syncfusion_flutter_charts: ^25.1.42+1
 
   # preferences thing idk (for setting activitiy during first launch)
   shared_preferences: ^2.2.2
 
   # slider service
-  syncfusion_flutter_sliders: ^24.2.7
 
-  syncfusion_flutter_core: ^24.2.7
+  syncfusion_flutter_core: ^25.1.42
 
   # the beta snackbar
   fluttertoast: ^8.2.4
@@ -77,6 +76,12 @@ dependencies:
   motion_tab_bar: ^2.0.4
   hooks_riverpod: ^2.5.1
   camera: ^0.10.5+9
+  http: ^1.2.1
+  socket_io_client: ^3.0.0-beta.2
+  flutter_turtle: ^0.4.2
+  process_run: ^0.14.2
+  path_provider: ^2.1.3
+  tflite_flutter: ^0.10.4
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -243,7 +248,7 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   riverpod_generator: ^2.3.9
   build_runner: ^2.4.8
-  custom_lint: ^0.5.11
+  custom_lint: ^0.6.4
   riverpod_lint: ^2.3.7
 
 
@@ -277,7 +282,6 @@ flutter:
     
     - assets/images/previewLightTheme.png
     - assets/images/previewDarkTheme.png
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

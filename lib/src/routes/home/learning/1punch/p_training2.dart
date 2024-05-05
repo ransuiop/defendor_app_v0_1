@@ -6,17 +6,17 @@ import 'package:defendor_app_v0_1/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../modules/providers/theme_provider.dart';
-import '../../../../utils/theme/typography.dart';
+import '../../../../../modules/providers/theme_provider.dart';
+import '../../../../../utils/theme/typography.dart';
 
-class BTraining3 extends ConsumerWidget {
-  const BTraining3({super.key});
+class PTraining2 extends ConsumerWidget {
+  const PTraining2({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeState = ref.read(appThemeStateNotifier);
     return Scaffold(
-      appBar: DOmniAppBar(tabName: 'Learning: Blocking'),
+      appBar: DOmniAppBar(tabName: 'Learning: Punching'),
       body: Column(
         children: [
           BuildTrainingTab(
