@@ -4,6 +4,7 @@ import 'package:defendor_app_v0_1/utils/theme/subtheme/dialog_theme.dart';
 import 'package:defendor_app_v0_1/utils/theme/subtheme/divider_theme.dart';
 import 'package:defendor_app_v0_1/utils/theme/subtheme/elevatedbutton_theme.dart';
 import 'package:defendor_app_v0_1/utils/theme/subtheme/listtile_theme.dart';
+import 'package:defendor_app_v0_1/utils/theme/subtheme/progressindicator_theme.dart';
 import 'package:defendor_app_v0_1/utils/theme/subtheme/radio_theme.dart';
 import 'package:defendor_app_v0_1/utils/theme/subtheme/snackbar_theme.dart';
 import 'package:defendor_app_v0_1/utils/theme/subtheme/switch_theme.dart';
@@ -24,9 +25,10 @@ class DTheme {
     elevatedButtonTheme: DElevatedButtonTheme.lightElevatedButtonTheme,
     // floatingActionButtonTheme: ,
     listTileTheme: DListTileTheme.lightListTileTheme,
+    progressIndicatorTheme: DProgressIndicatorTheme.lightProgressIndicatorTheme,
+    radioTheme: DRadioTheme.lightRadioTheme,
     snackBarTheme: DSnackBarTheme.lightSnackBarTheme,
     switchTheme: DSwitchTheme.lightSwitchTheme,
-    radioTheme: DRadioTheme.lightRadioTheme,
     // tooltipTheme: ,
   );
 
@@ -42,9 +44,10 @@ class DTheme {
     elevatedButtonTheme: DElevatedButtonTheme.darkElevatedButtonTheme,
     // floatingActionButtonTheme: ,
     listTileTheme: DListTileTheme.darkListTileTheme,
+    progressIndicatorTheme: DProgressIndicatorTheme.darkProgressIndicatorTheme,
+    radioTheme: DRadioTheme.darkRadioTheme,
     snackBarTheme: DSnackBarTheme.darkSnackBarTheme,
     switchTheme: DSwitchTheme.darkSwitchTheme,
-    radioTheme: DRadioTheme.darkRadioTheme,
     // tooltipTheme: ,
   );
 }

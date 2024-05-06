@@ -82,6 +82,7 @@ dependencies:
   process_run: ^0.14.2
   path_provider: ^2.1.3
   tflite_flutter: ^0.10.4
+  image: ^4.1.7
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -275,13 +276,15 @@ flutter:
 
     - assets/images/Punch/LPunch.png
     - assets/images/Kick/LKick.png
-    - assets/images/Block/LBlock.png
+    - assets/images/Chop/LChop.png
     - assets/images/Punch/DPunch.png
     - assets/images/Kick/DKick.png
-    - assets/images/Block/DBlock.png
+    - assets/images/Chop/DChop.png
     
     - assets/images/previewLightTheme.png
     - assets/images/previewDarkTheme.png
+
+    - assets/scripts/pose_landmark_lite.tflite
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -66,6 +66,8 @@ class _HomeNavViewState extends State<HomeNavView> {
 
   @override
   Widget build(BuildContext context) {
+    String? routeName = ModalRoute.of(context)?.settings.name;
+
     return PopScope(
       canPop: false,
       onPopInvoked: (_) async {
@@ -83,93 +85,35 @@ class _HomeNavViewState extends State<HomeNavView> {
             ],
           ),
         ),
-        bottomNavigationBar:
-            // NavigationBarTheme(
-            //   data: NavigationBarThemeData(
-            //     labelTextStyle: MaterialStateProperty.resolveWith(
-            //         (states) => states.contains(MaterialState.selected)
-            //             ? TextStyle(
-            //                 fontFamily: 'Metropolis',
-            //                 fontWeight: FontWeight.w400,
-            //                 color: strikeLiteClr,
-            //               )
-            //             : TextStyle(
-            //                 fontFamily: 'Metropolis',
-            //                 fontWeight: FontWeight.w400,
-            //                 color: Colors.grey,
-            //               )),
-            //       indicatorShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-            //   ),
-            //   child: NavigationBar(
-            //     labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-            //     backgroundColor: offbgClr,
-            //     indicatorColor: Colors.transparent,
-            //     onDestinationSelected: (int index) {
-            //       setState(() {
-            //         _selectedIndex = index;
-            //       });
-            //     },
-            //     selectedIndex: _selectedIndex,
-            //     destinations: [
-            //       NavigationDestination(
-            //           selectedIcon: Icon(
-            //             Icons.home,
-            //             color: strikeLiteClr,
-            //           ),
-            //           icon: Icon(
-            //             Icons.home_outlined,
-            //             color: Colors.grey,
-            //           ),
-            //           label: 'Learning'),
-            //       NavigationDestination(
-            //           selectedIcon: Icon(
-            //             Icons.pie_chart,
-            //             color: strikeLiteClr,
-            //           ),
-            //           icon: Icon(
-            //             Icons.pie_chart_outline,
-            //             color: Colors.grey,
-            //           ),
-            //           label: 'Stats'),
-            //       NavigationDestination(
-            //           selectedIcon: Icon(
-            //             Icons.settings,
-            //             color: strikeLiteClr,
-            //           ),
-            //           icon: Icon(
-            //             Icons.settings_outlined,
-            //             color: Colors.grey,
-            //           ),
-            //           label: 'Settings')
-            //     ],
-            //   ),
-            // ),
-            MotionTabBar(
-          initialSelectedTab: "Home",
-          labels: ["Home", "Statistics", "Settings"],
-          icons: [
-            Icons.home_outlined,
-            Icons.pie_chart_outline,
-            Icons.settings_outlined
-          ],
-          tabSize: 60,
-          tabBarHeight: 60,
-          textStyle: TextStyle(
-            fontSize: 0,
-            color: Colors.black,
-            fontWeight: FontWeight.w500,
+        bottomNavigationBar: Visibility(
+          visible: routeName == '/camera' ? true : false,
+          child: MotionTabBar(
+            initialSelectedTab: "Home",
+            labels: ["Home", "Statistics", "Settings"],
+            icons: [
+              Icons.home_outlined,
+              Icons.pie_chart_outline,
+              Icons.settings_outlined
+            ],
+            tabSize: 60,
+            tabBarHeight: 60,
+            textStyle: TextStyle(
+              fontSize: 0,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+            tabIconColor: defDBlu,
+            tabIconSize: 35,
+            tabIconSelectedSize: 35,
+            tabSelectedColor: defGry,
+            tabIconSelectedColor: defDBlu,
+            tabBarColor: defWht,
+            onTabItemSelected: (int value) {
+              setState(() {
+                _selectedIndex = value;
+              });
+            },
           ),
-          tabIconColor: defDBlu,
-          tabIconSize: 35,
-          tabIconSelectedSize: 35,
-          tabSelectedColor: defGry,
-          tabIconSelectedColor: defDBlu,
-          tabBarColor: defWht,
-          onTabItemSelected: (int value) {
-            setState(() {
-              _selectedIndex = value;
-            });
-          },
         ),
       ),
     );
@@ -220,13 +164,13 @@ class __HomeNavigatorState extends State<_HomeNavigator> {
               case '/kt3':
                 return KTraining3();
               case '/block':
-                return LearningBlockTab();
-              case '/bt1':
-                return BTraining1();
-              case '/bt2':
-                return BTraining2();
-              case '/bt3':
-                return BTraining3();
+                return LearningChopTab();
+              case '/ct1':
+                return CTraining1();
+              case '/ct2':
+                return CTraining2();
+              case '/ct3':
+                return CTraining3();
               case '/camera':
                 return PoseDetectionScreen();
               default:

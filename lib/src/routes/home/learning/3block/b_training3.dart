@@ -9,14 +9,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../modules/providers/theme_provider.dart';
 import '../../../../../utils/theme/typography.dart';
 
-class BTraining3 extends ConsumerWidget {
-  const BTraining3({super.key});
+class CTraining3 extends ConsumerWidget {
+  const CTraining3({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeState = ref.read(appThemeStateNotifier);
     return Scaffold(
-      appBar: DOmniAppBar(tabName: 'Learning: Blocking'),
+      appBar: DOmniAppBar(tabName: 'Learning: Chopping'),
       body: Column(
         children: [
           BuildTrainingTab(

@@ -37,7 +37,8 @@ class _DefendorState extends State<Defendor> {
           debugShowCheckedModeBanner: false,
           theme: DTheme.lightMode,
           darkTheme: DTheme.darkMode,
-          themeMode: themeState.isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
+          themeMode:
+              themeState.isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
           home: HomeNavView(),
         );
       },

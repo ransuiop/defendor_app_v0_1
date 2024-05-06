@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:defendor_app_v0_1/utils/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LearningBlockTab extends ConsumerWidget {
-  const LearningBlockTab({super.key});
+class LearningChopTab extends ConsumerWidget {
+  const LearningChopTab({super.key});
 
-  static List blockTechniques = ['/bt1', '/bt2', '/bt3'];
+  static List blockTechniques = ['/ct1', '/ct2', '/ct3'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeState = ref.read(appThemeStateNotifier);
 
     return Scaffold(
-      appBar: DOmniAppBar(tabName: "Blocking"),
+      appBar: DOmniAppBar(tabName: "Chopping"),
       body: ListView.separated(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         scrollDirection: Axis.vertical,

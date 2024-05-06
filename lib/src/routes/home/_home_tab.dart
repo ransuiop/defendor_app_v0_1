@@ -14,14 +14,14 @@ class HomeTab extends ConsumerWidget {
   static List categoriesImgLight = [
     'assets/images/Punch/LPunch.png',
     'assets/images/Kick/LKick.png',
-    'assets/images/Block/LBlock.png'
+    'assets/images/Chop/LChop.png'
   ];
   static List categoriesImgDark = [
     'assets/images/Punch/DPunch.png',
     'assets/images/Kick/DKick.png',
-    'assets/images/Block/DBlock.png'
+    'assets/images/Chop/DChop.png'
   ];
-  static List categoriesName = ['PUNCHING', 'KICKING', 'BLOCKING'];
+  static List categoriesName = ['PUNCHING', 'KICKING', 'CHOPPING'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
