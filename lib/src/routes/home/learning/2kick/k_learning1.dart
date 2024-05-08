@@ -1,33 +1,32 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:defendor_app_v0_1/utils/widgets/learning/build_training_tab.dart';
+import 'package:defendor_app_v0_1/utils/widgets/learning/build_video_player.dart';
 import 'package:defendor_app_v0_1/utils/widgets/omni/omni_app_bar.dart';
-import 'package:defendor_app_v0_1/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../modules/providers/theme_provider.dart';
 import '../../../../../utils/theme/typography.dart';
 
-class PTraining1 extends ConsumerWidget {
-  const PTraining1({super.key});
+class KTraining1 extends ConsumerWidget {
+  const KTraining1({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeState = ref.read(appThemeStateNotifier);
     return Scaffold(
-      appBar: DOmniAppBar(tabName: 'Learning: Punching'),
+      appBar: DOmniAppBar(tabName: 'Learning: Kicking'),
       body: Column(
         children: [
-          BuildTrainingTab(
+          BuildVideoPlayer(
               demoVidUrl:
-                  'https://firebasestorage.googleapis.com/v0/b/initvideodatabase.appspot.com/o/demoVid%2Flegends.mp4?alt=media&token=bb358a24-3000-4ec0-8543-a37b40dd3446'),
+                  'https://firebasestorage.googleapis.com/v0/b/initvideodatabase.appspot.com/o/trueDemoVid%2FGroinKickLeft.mp4?alt=media&token=37d1c3b0-7d3a-4338-9bea-882b15154f14'),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: EdgeInsets.only(left: 16, top: 16),
               child: Text(
-                "Training Name",
+                "Left Groin Kick",
                 textAlign: TextAlign.left,
                 style: themeState.isDarkModeEnabled
                     ? DTypography.defStydarkTrainingName
@@ -40,7 +39,7 @@ class PTraining1 extends ConsumerWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Text(
-                lipsumText,
+                "The Left Groin Kick is a low, forceful kick delivered with the lead leg, targeting the opponent's groin area. This technique is designed to incapacitate the opponent quickly and is a key self-defense move in Krav Maga, as it aims to neutralize threats in a vulnerable area.",
                 textAlign: TextAlign.justify,
                 style: themeState.isDarkModeEnabled
                     ? DTypography.defStydarkTrainingDesc

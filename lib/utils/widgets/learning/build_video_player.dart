@@ -7,15 +7,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
 
-class BuildTrainingTab extends ConsumerStatefulWidget {
-  const BuildTrainingTab({super.key, required this.demoVidUrl});
+class BuildVideoPlayer extends ConsumerStatefulWidget {
+  const BuildVideoPlayer({super.key, required this.demoVidUrl});
   final String demoVidUrl;
 
   @override
-  ConsumerState<BuildTrainingTab> createState() => _BuildTrainingTabState();
+  ConsumerState<BuildVideoPlayer> createState() => _BuildVideoPlayerState();
 }
 
-class _BuildTrainingTabState extends ConsumerState<BuildTrainingTab> {
+class _BuildVideoPlayerState extends ConsumerState<BuildVideoPlayer> {
   late VideoPlayerController _controller;
 
   @override
@@ -31,6 +31,7 @@ class _BuildTrainingTabState extends ConsumerState<BuildTrainingTab> {
     _controller.initialize().then((_) {
       setState(() {});
     });
+    _controller.setVolume(0.0);
     _controller.pause();
   }
 

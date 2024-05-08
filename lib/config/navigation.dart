@@ -8,22 +8,19 @@
 import '../src/routes/onboarding/onboarding1.dart';
 import '../src/routes/onboarding/onboarding2.dart';
 import '../src/routes/onboarding/onboarding3.dart';
-import '../src/routes/home/learning/1punch/p_training2.dart';
-import '../src/routes/home/learning/1punch/p_training1.dart';
-import '../src/routes/home/learning/1punch/p_training3.dart';
-import '../src/routes/home/learning/2kick/k_training1.dart';
-import '../src/routes/home/learning/2kick/k_training2.dart';
-import '../src/routes/home/learning/2kick/k_training3.dart';
-import '../src/routes/home/learning/3block/b_training1.dart';
-import '../src/routes/home/learning/3block/b_training2.dart';
-import '../src/routes/home/learning/3block/b_training3.dart';
+import '../src/routes/home/learning/1punch/p_learning2.dart';
+import '../src/routes/home/learning/1punch/p_learning1.dart';
+import '../src/routes/home/learning/2kick/k_learning1.dart';
+import '../src/routes/home/learning/2kick/k_learning2.dart';
+import '../src/routes/home/learning/3chop/c_learning1.dart';
+import '../src/routes/home/learning/3chop/c_learning2.dart';
 import '../src/routes/home/_home_tab.dart';
-import '../src/routes/home/learning/_learning_block_tab.dart';
+import '../src/routes/home/learning/_learning_chop_tab.dart';
 import '../src/routes/home/learning/_learning_kick_tab.dart';
 import '../src/routes/home/learning/_learning_punch_tab.dart';
 import '../src/routes/home/learning/pose_detection_screen.dart';
-import '../src/routes/stats/_stats_tab.dart';
-import '../src/routes/stats/extended_calendar.dart';
+// import '../src/routes/stats/_stats_tab.dart';
+// import '../src/routes/stats/extended_calendar.dart';
 import '../src/routes/settings/_settings_tab.dart';
 import '../src/routes/settings/about_sett.dart';
 import '../src/routes/settings/book_sett.dart';
@@ -49,7 +46,7 @@ class _HomeNavViewState extends State<HomeNavView> {
 
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
     _homeNavigatorKey,
-    _statsNavigatorKey,
+    // _statsNavigatorKey,
     _settNavigatorKey,
   ];
 
@@ -80,19 +77,19 @@ class _HomeNavViewState extends State<HomeNavView> {
             index: _selectedIndex,
             children: [
               _HomeNavigator(),
-              _StatsNavigator(),
+              // _StatsNavigator(),
               _SettNavigator(),
             ],
           ),
         ),
         bottomNavigationBar: Visibility(
-          visible: routeName == '/camera' ? true : false,
+          visible: routeName == '/camera' ? false : true,
           child: MotionTabBar(
             initialSelectedTab: "Home",
-            labels: ["Home", "Statistics", "Settings"],
+            labels: ["Home", "Settings"],
             icons: [
               Icons.home_outlined,
-              Icons.pie_chart_outline,
+              // Icons.pie_chart_outline,
               Icons.settings_outlined
             ],
             tabSize: 60,
@@ -153,24 +150,18 @@ class __HomeNavigatorState extends State<_HomeNavigator> {
                 return PTraining1();
               case '/pt2':
                 return PTraining2();
-              case '/pt3':
-                return PTraining3();
               case '/kick':
                 return LearningKickTab();
               case '/kt1':
                 return KTraining1();
               case '/kt2':
                 return KTraining2();
-              case '/kt3':
-                return KTraining3();
               case '/block':
                 return LearningChopTab();
               case '/ct1':
                 return CTraining1();
               case '/ct2':
                 return CTraining2();
-              case '/ct3':
-                return CTraining3();
               case '/camera':
                 return PoseDetectionScreen();
               default:
@@ -183,38 +174,38 @@ class __HomeNavigatorState extends State<_HomeNavigator> {
   }
 }
 
-class _StatsNavigator extends StatefulWidget {
-  const _StatsNavigator();
+// class _StatsNavigator extends StatefulWidget {
+//   const _StatsNavigator();
 
-  @override
-  State<_StatsNavigator> createState() => __StatsNavigatorState();
-}
+//   @override
+//   State<_StatsNavigator> createState() => __StatsNavigatorState();
+// }
 
-GlobalKey<NavigatorState> _statsNavigatorKey = GlobalKey<NavigatorState>();
+// GlobalKey<NavigatorState> _statsNavigatorKey = GlobalKey<NavigatorState>();
 
-class __StatsNavigatorState extends State<_StatsNavigator> {
-  @override
-  Widget build(BuildContext context) {
-    return Navigator(
-      key: _statsNavigatorKey,
-      onGenerateRoute: (RouteSettings settings) {
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (BuildContext context) {
-            switch (settings.name) {
-              case '/':
-                return StatsTab();
-              case '/ext_cal':
-                return ExtendedCalendar();
-              default:
-                return StatsTab();
-            }
-          },
-        );
-      },
-    );
-  }
-}
+// class __StatsNavigatorState extends State<_StatsNavigator> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Navigator(
+//       key: _statsNavigatorKey,
+//       onGenerateRoute: (RouteSettings settings) {
+//         return MaterialPageRoute(
+//           settings: settings,
+//           builder: (BuildContext context) {
+//             switch (settings.name) {
+//               case '/':
+//                 return StatsTab();
+//               case '/ext_cal':
+//                 return ExtendedCalendar();
+//               default:
+//                 return StatsTab();
+//             }
+//           },
+//         );
+//       },
+//     );
+//   }
+// }
 
 class _SettNavigator extends StatefulWidget {
   const _SettNavigator();

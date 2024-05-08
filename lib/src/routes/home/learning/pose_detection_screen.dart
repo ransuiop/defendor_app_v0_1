@@ -1,100 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_declarations
 
-import 'dart:developer';
-import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
-import 'dart:async';
-import 'dart:typed_data';
+import 'dart:math';
+import 'dart:developer' as dev;
 import 'dart:ui' as ui;
-import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
-
-class PoseDetector {
-  tfl.Interpreter? _interpreter;
-
-  PoseDetector() {
-    loadModel();
-  }
-
-  Future<void> loadModel() async {
-    try {
-      final interpreterOptions = tfl.InterpreterOptions()
-        ..threads = 4; // Adjust based on your model and device capabilities
-      _interpreter = await tfl.Interpreter.fromAsset(
-          'assets/scripts/pose_landmark_lite.tflite',
-          options: interpreterOptions);
-    } catch (e) {
-      log('Failed to load model: $e');
-    }
-  }
-
-  Future<List<List<double>>?> detectPose(Uint8List imageBytes) async {
-    if (_interpreter == null) {
-      log('Model not loaded');
-      return null;
-    }
-
-    // Convert imageBytes to a ui.Image
-    final Completer<ui.Image> completer = Completer();
-    ui.decodeImageFromList(imageBytes, (ui.Image img) {
-      completer.complete(img);
-    });
-    final ui.Image rawImage = await completer.future;
-
-    // Resize the image to match the model's input size
-    final int inputSize = 256; // Adjust size as needed
-    final ByteData? byteData = await rawImage.toByteData();
-    if (byteData == null) {
-      return null;
-    }
-    final Uint8List resizedBytes = Uint8List.view(byteData.buffer);
-
-    // Preprocess the image: normalize pixel values to range [0, 1]
-    final Float32List inputData = Float32List(1 * inputSize * inputSize * 3);
-    for (int i = 0; i < resizedBytes.length; i++) {
-      inputData[i] = resizedBytes[i] / 255.0;
-    }
-
-    // Run inference
-    final outputs = List.generate(
-        _interpreter!.getOutputTensors().length,
-        (index) => Float32List(_interpreter!
-            .getOutputTensors()[index]
-            .shape
-            .reduce((a, b) => a * b)));
-    _interpreter!.run([inputData], outputs);
-
-    // Process outputs to get pose landmarks
-    final poseLandmarks = processOutputs(outputs);
-
-    return poseLandmarks;
-  }
-
-  List<List<double>> processOutputs(List<Float32List> outputs) {
-    final List<List<double>> poseLandmarks = [];
-    final int numKeypoints =
-        outputs[0].length ~/ 3; // Assuming each keypoint has 3 values
-
-    for (int i = 0; i < numKeypoints; i++) {
-      final double x = outputs[0][i * 3];
-      final double y = outputs[0][i * 3 + 1];
-      final double confidence = outputs[0][i * 3 + 2];
-
-      // Check if the confidence score is above a certain threshold
-      if (confidence > 0.5) {
-        // Adjust threshold as needed
-        // Add the keypoint to the list
-        poseLandmarks.add([x, y, confidence]);
-      }
-    }
-
-    // Add placeholders for missing keypoints
-    while (poseLandmarks.length < numKeypoints) {
-      poseLandmarks.add([0, 0, 0]);
-    }
-
-    return poseLandmarks;
-  }
-}
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 
 class PoseDetectionScreen extends StatefulWidget {
   const PoseDetectionScreen({super.key});
@@ -104,92 +15,362 @@ class PoseDetectionScreen extends StatefulWidget {
 }
 
 class _PoseDetectionScreenState extends State<PoseDetectionScreen> {
-  CameraController? _cameraController;
-  bool _isDetecting = false;
-  final PoseDetector _poseDetector = PoseDetector();
+  late PoseDetector _poseDetector;
+  bool _isProcessing = false;
+  bool _initialStanceDetected = false;
+  bool _finalPoseDetected = false;
+  bool _cooldownActive = false;
+  late double _cooldownTimer;
+  final double _cooldownDuration = 5.0;
+  final List<double> _thresholds = [50.0, 50.0, 40.0, 10.0];
+
+  late Future<CameraController> _cameraControllerFuture;
 
   @override
   void initState() {
+    _cameraControllerFuture = _initializeCamera();
+    _initializePoseDetector();
     super.initState();
-    _initializeCamera();
-  }
-
-  Future<void> _initializeCamera() async {
-    final cameras = await availableCameras();
-    final camera = cameras.first;
-    _cameraController = CameraController(camera, ResolutionPreset.medium);
-    await _cameraController!.initialize();
-    if (!mounted) {
-      return;
-    }
-    setState(() {});
   }
 
   @override
   void dispose() {
-    _cameraController?.dispose();
+    _poseDetector.close();
     super.dispose();
   }
 
-  Future<void> _startDetecting() async {
-    if (_cameraController == null || !_cameraController!.value.isInitialized) {
+  Future<CameraController> _initializeCamera() async {
+    List<CameraDescription> cameras = await availableCameras();
+    CameraController cameraController = CameraController(
+      cameras.first,
+      ResolutionPreset.high,
+      imageFormatGroup: ImageFormatGroup.yuv420,
+    );
+    await cameraController.initialize();
+    cameraController.startImageStream(_processImage);
+    return cameraController;
+  }
+
+  void _initializePoseDetector() {
+    _poseDetector = PoseDetector(
+      options: PoseDetectorOptions(
+        mode: PoseDetectionMode.stream,
+        model: PoseDetectionModel.base,
+      ),
+    );
+  }
+
+  Future<void> _processImage(CameraImage image) async {
+    if (_isProcessing) {
       return;
     }
 
-    if (_isDetecting) return;
+    _isProcessing = true;
+    // Image dimension, ByteBuffer size and format
+    final inputImage = InputImage.fromBytes(
+      bytes: image.planes.first.bytes,
+      metadata: InputImageMetadata(
+        size: Size(image.width.toDouble(), image.height.toDouble()),
+        rotation: InputImageRotation.rotation90deg,
+        format: InputImageFormat.yuv_420_888,
+        bytesPerRow: image.planes.first.bytesPerRow,
+      ),
+    );
+    dev.log('Image dimensions: ${image.width} x ${image.height}');
+    dev.log('Image format: ${image.format}');
+    dev.log('Bytes per row: ${image.planes.first.bytesPerRow}');
 
-    _isDetecting = true;
+    final poses = await _poseDetector.processImage(inputImage);
 
-    while (_isDetecting) {
-      try {
-        final XFile image = await _cameraController!.takePicture();
-        final imageBytes = await image.readAsBytes();
-        final poseLandmarks = await _poseDetector.detectPose(imageBytes);
-        if (poseLandmarks != null) {
-          // Process pose landmarks and update UI if needed
-          log('Pose landmarks: $poseLandmarks');
+    if (poses.isNotEmpty) {
+      final pose = poses.first;
+      final landmarks = pose.landmarks.values.toList();
+      _checkInitialStance(landmarks);
+      _checkFinalPose(landmarks);
+      _processAndDrawPose(landmarks);
+    }
+
+    _isProcessing = false;
+  }
+
+  void _checkInitialStance(List<PoseLandmark> landmarks) {
+    if (landmarks.length >= 16) {
+      final wristY = landmarks[15].y;
+      final elbowY = landmarks[14].y;
+      _initialStanceDetected = wristY < elbowY;
+    } else {
+      _initialStanceDetected = false;
+    }
+  }
+
+  void _checkFinalPose(List<PoseLandmark> landmarks) {
+    if (_initialStanceDetected && !_finalPoseDetected) {
+      if (_initialStance(landmarks)) {
+        if (_angleThreshold(landmarks, [11, 13, 15], [12, 14, 16], [13, 11, 23],
+            [14, 12, 24], _thresholds)) {
+          _finalPoseDetected = true;
+          _cooldownActive = true;
+          _cooldownTimer = DateTime.now().millisecondsSinceEpoch +
+              (_cooldownDuration * 1000).toDouble();
         }
-      } catch (e) {
-        log('Error: $e');
       }
     }
   }
 
-  void _stopDetecting() {
-    _isDetecting = false;
+  bool _initialStance(List<PoseLandmark> landmarks) {
+    if (landmarks.length >= 16) {
+      final wristY = landmarks[15].y;
+      final elbowY = landmarks[14].y;
+      return wristY < elbowY;
+    }
+    return false;
   }
+
+  bool _angleThreshold(
+      List<PoseLandmark> landmarks,
+      List<int> indices1,
+      List<int> indices2,
+      List<int> indices3,
+      List<int> indices4,
+      List<double> thresholds) {
+    final angles = [
+      _calculateAngle(landmarks[indices1[0]], landmarks[indices1[1]],
+          landmarks[indices1[2]]),
+      _calculateAngle(landmarks[indices2[0]], landmarks[indices2[1]],
+          landmarks[indices2[2]]),
+      _calculateAngle(landmarks[indices3[0]], landmarks[indices3[1]],
+          landmarks[indices3[2]]),
+      _calculateAngle(landmarks[indices4[0]], landmarks[indices4[1]],
+          landmarks[indices4[2]]),
+    ];
+
+    return angles.every((angle) => angle > thresholds[angles.indexOf(angle)]);
+  }
+
+  double _calculateAngle(PoseLandmark p1, PoseLandmark p2, PoseLandmark p3) {
+    final radians =
+        atan2(p3.y - p2.y, p3.x - p2.x) - atan2(p1.y - p2.y, p1.x - p2.x);
+    return (radians * 180 / pi + 360) % 360;
+  }
+
+  void _processAndDrawPose(List<PoseLandmark> landmarks) {
+    if (!_initialStanceDetected) {
+      _initialStanceDetected = _initialStance(landmarks);
+      if (!_initialStanceDetected) {
+        // Reset the pose detection if the initial stance is lost for too long
+        if (DateTime.now().millisecondsSinceEpoch - _cooldownTimer > 5000) {
+          _initialStanceDetected = false;
+          _finalPoseDetected = false;
+          _cooldownTimer = DateTime.now().millisecondsSinceEpoch +
+              (_cooldownDuration * 1000).toDouble();
+        }
+      }
+    } else {
+      if (!_finalPoseDetected) {
+        if (_initialStance(landmarks)) {
+          if (_angleThreshold(landmarks, [11, 13, 15], [12, 14, 16],
+              [13, 11, 23], [14, 12, 24], _thresholds)) {
+            _finalPoseDetected = true;
+            _cooldownActive = true;
+            _cooldownTimer = DateTime.now().millisecondsSinceEpoch +
+                (_cooldownDuration * 1000).toDouble();
+          }
+        }
+      } else {
+        if (DateTime.now().millisecondsSinceEpoch > _cooldownTimer) {
+          _cooldownActive = false;
+        }
+
+        if (!_cooldownActive) {
+          if (!_initialStance(landmarks)) {
+            _initialStanceDetected = false;
+            _finalPoseDetected = false;
+            _cooldownTimer = DateTime.now().millisecondsSinceEpoch +
+                (_cooldownDuration * 1000).toDouble();
+          } else {
+            final angles = [
+              _calculateAngle(landmarks[24], landmarks[26], landmarks[28]),
+              _calculateAngle(landmarks[12], landmarks[24], landmarks[26]),
+              _calculateAngle(landmarks[12], landmarks[14], landmarks[16]),
+              _calculateAngle(landmarks[11], landmarks[23], landmarks[25]),
+              _calculateAngle(landmarks[26], landmarks[28], landmarks[32]),
+              _calculateAngle(landmarks[11], landmarks[13], landmarks[15]),
+              _calculateAngle(landmarks[25], landmarks[27], landmarks[31]),
+            ];
+
+            final interpolatedAngles = angles.map((angle) {
+              final src = [
+                193.0,
+                218.0,
+                195.0,
+                180.0,
+                12.0,
+                58.0,
+                150.0,
+                148.0,
+                160.0,
+                100.0,
+                330.0,
+                175.0,
+                100.0,
+                103.0
+              ];
+              final dst = [
+                0.0,
+                100.0,
+                0.0,
+                100.0,
+                0.0,
+                100.0,
+                0.0,
+                100.0,
+                0.0,
+                100.0,
+                0.0,
+                100.0,
+                0.0,
+                100.0
+              ];
+              return ui
+                      .lerpDouble(src[angles.indexOf(angle)],
+                          dst[angles.indexOf(angle)], angle / 360)
+                      ?.toDouble() ??
+                  0.0;
+            }).toList();
+
+            final avgAngle = interpolatedAngles.isNotEmpty
+                ? interpolatedAngles.reduce((a, b) => a + b) /
+                    interpolatedAngles.length
+                : 0.0;
+
+            final maxBarHeight = 100.0;
+            final whiteRectHeight = maxBarHeight * 2;
+            final whiteRectTop = 400.0 - whiteRectHeight;
+            final borderThickness = 6.0;
+
+            setState(() {
+              customPaint = CustomPaint(
+                painter: PosePainter(
+                  landmarks: landmarks,
+                  avgAngle: avgAngle,
+                  maxBarHeight: maxBarHeight,
+                  whiteRectTop: whiteRectTop,
+                  borderThickness: borderThickness,
+                ),
+              );
+            });
+
+            if (avgAngle <= 10) {
+              dev.log('Angles when avg_angle <= 10:');
+              dev.log('$angles');
+            }
+          }
+        }
+      }
+    }
+  }
+
+  CustomPaint? customPaint;
 
   @override
   Widget build(BuildContext context) {
-    if (_cameraController == null || !_cameraController!.value.isInitialized) {
-      return Container();
-    }
-
-    final mediaQuery = MediaQuery.of(context);
-    final deviceSize = mediaQuery.size;
+    var screenSize = MediaQuery.of(context).size;
+    double aspectRatio = screenSize.width / screenSize.height;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Camera Page')),
-      body: Stack(
-        children: [
-          Transform.scale(
-            scale: deviceSize.aspectRatio,
-            child: Center(
-              child: AspectRatio(
-                aspectRatio: _cameraController!.value.aspectRatio,
-                child: CameraPreview(_cameraController!),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: ElevatedButton(
-              onPressed: _isDetecting ? _stopDetecting : _startDetecting,
-              child: Text(_isDetecting ? 'Stop' : 'Start Detection'),
-            ),
-          ),
-        ],
+      body: FutureBuilder<CameraController>(
+        future: _cameraControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              return Transform.scale(
+                scale: 1.0,
+                child: AspectRatio(
+                  aspectRatio: aspectRatio,
+                  child: CameraPreview(snapshot.data!),
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
+          }
+          return Center(child: CircularProgressIndicator());
+        },
       ),
+      // Rest of the UI code remains the same
     );
+  }
+}
+
+class PosePainter extends CustomPainter {
+  final List<PoseLandmark> landmarks;
+  final double avgAngle;
+  final double maxBarHeight;
+  final double whiteRectTop;
+  final double borderThickness;
+
+  PosePainter({
+    required this.landmarks,
+    required this.avgAngle,
+    required this.maxBarHeight,
+    required this.whiteRectTop,
+    required this.borderThickness,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint();
+
+    // Draw the white rectangle
+    paint.color = Colors.white;
+    canvas.drawRect(
+      Rect.fromLTWH(
+        10 - borderThickness,
+        whiteRectTop - borderThickness,
+        90 + 2 * borderThickness,
+        maxBarHeight * 2 + 2 * borderThickness,
+      ),
+      paint,
+    );
+
+    // Draw the green/red bar
+    final barHeight = avgAngle * 2;
+    final barTop = 400.0 - barHeight;
+    paint.color = barHeight > 1.7 * maxBarHeight ? Colors.red : Colors.green;
+    canvas.drawRect(
+      Rect.fromLTWH(10, barTop, 80, barHeight),
+      paint,
+    );
+
+    // Draw the text if the bar height surpasses 170%
+    if (barHeight > 1.7 * maxBarHeight) {
+      final textSpan = TextSpan(
+        text: 'Correct Pose',
+        style: const TextStyle(
+          color: Colors.red,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+      final textPainter = TextPainter(
+        text: textSpan,
+        textDirection: ui.TextDirection.ltr,
+      )..layout(
+          minWidth: 0,
+          maxWidth: size.width,
+        );
+      final textX = (size.width - textPainter.width) / 2;
+      final textY = size.height - 50;
+      textPainter.paint(canvas, Offset(textX, textY));
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant PosePainter oldDelegate) {
+    return oldDelegate.landmarks != landmarks ||
+        oldDelegate.avgAngle != avgAngle ||
+        oldDelegate.maxBarHeight != maxBarHeight ||
+        oldDelegate.whiteRectTop != whiteRectTop ||
+        oldDelegate.borderThickness != borderThickness;
   }
 }
