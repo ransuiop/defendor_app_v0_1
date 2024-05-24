@@ -26,7 +26,7 @@ class PTraining2 extends ConsumerWidget {
             child: Padding(
               padding: EdgeInsets.only(left: 16, top: 16),
               child: Text(
-                "Cross",
+                "Right Jab",
                 textAlign: TextAlign.left,
                 style: themeState.isDarkModeEnabled
                     ? DTypography.defStydarkTrainingName
@@ -39,7 +39,7 @@ class PTraining2 extends ConsumerWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Text(
-                "The Cross is a powerful straight punch delivered with the rear hand. It is often used to follow up a Jab, creating a one-two combination that can overwhelm the opponent. The Cross targets the opponent's face or upper body and is a core offensive technique in Krav Maga.",
+                "The Right Jab is a powerful straight punch delivered with the rear hand. It is often used to follow up a Jab, creating a one-two combination that can overwhelm the opponent. The Cross targets the opponent's face or upper body and is a core offensive technique in Krav Maga.",
                 textAlign: TextAlign.justify,
                 style: themeState.isDarkModeEnabled
                     ? DTypography.defStydarkTrainingDesc

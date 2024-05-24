@@ -10,20 +10,20 @@ class SettingsTab extends StatelessWidget {
   static List settIcons = [
     Icons.tune,
     Icons.notifications_outlined,
-    Icons.bookmarks_outlined,
+    // Icons.bookmarks_outlined,
     Icons.info_outline_rounded
   ];
-  static List titlesText = ["General", "Notifications", "Bookmarks", "About"];
+  static List titlesText = ["General", "Notifications", "About"];
   static List subtitlesText = [
     "Manage display, accessibility settings, and preferences.",
     "Control how notifications are sent to your device.",
-    "Organize your preferred categories and self-defense techniques for your progress.",
+    // "Organize your preferred categories and self-defense techniques for your progress.",
     "Learn more about what we're about!"
   ];
   static List settRoutes = [
     '/gen_sett',
     '/notif_sett',
-    '/book_sett',
+    // '/book_sett',
     '/about_sett'
   ];
 

@@ -12,7 +12,7 @@ class LearningPunchTab extends ConsumerWidget {
   const LearningPunchTab({super.key});
 
   static List punchTechniques = ['/pt1', '/pt2'];
-  static List punchTechniquesName = ['JAB', 'CROSS'];
+  static List punchTechniquesName = ['L. JAB', 'R. JAB'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

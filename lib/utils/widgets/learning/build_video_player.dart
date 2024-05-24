@@ -3,7 +3,7 @@
 import 'package:defendor_app_v0_1/modules/providers/theme_provider.dart';
 import 'package:defendor_app_v0_1/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
 
@@ -115,10 +115,8 @@ class _BuildVideoPlayerState extends ConsumerState<BuildVideoPlayer> {
                       backgroundColor: defBBlu,
                       shape: CircleBorder(),
                       onPressed: () {
-                        if (MediaQuery.of(context).orientation == Orientation.portrait) 
-                        { 
-                            SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]); 
-                        }
+                        // SystemChrome.setPreferredOrientations(
+                        //     [DeviceOrientation.landscapeLeft]);
                         Navigator.pushNamed(context, '/camera');
                       },
                       child: Icon(Icons.camera),

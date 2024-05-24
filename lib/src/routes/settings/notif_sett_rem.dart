@@ -184,23 +184,23 @@ class _NotifRemSettState extends ConsumerState<NotifRemSett> {
                         enabled: ref.watch(ableSetDailyTimeBoolProvider),
                       ),
                       // TODO: REMINDER SYSTEM
-                      SwitchListTile(
-                        contentPadding: EdgeInsets.only(left: 20, right: 20),
-                        title: Text(
-                          "Practice reminders",
-                          textAlign: TextAlign.left,
-                        ),
-                        subtitle: Text(
-                          "Detects times when you might miss your selected practice quota and reminds you.",
-                          textAlign: TextAlign.left,
-                        ),
-                        value: initPracRemValue,
-                        onChanged: (value) {
-                          setState(() {
-                            initPracRemValue = value;
-                          });
-                        },
-                      ),
+                      // SwitchListTile(
+                      //   contentPadding: EdgeInsets.only(left: 20, right: 20),
+                      //   title: Text(
+                      //     "Practice reminders",
+                      //     textAlign: TextAlign.left,
+                      //   ),
+                      //   subtitle: Text(
+                      //     "Detects times when you might miss your selected practice quota and reminds you.",
+                      //     textAlign: TextAlign.left,
+                      //   ),
+                      //   value: initPracRemValue,
+                      //   onChanged: (value) {
+                      //     setState(() {
+                      //       initPracRemValue = value;
+                      //     });
+                      //   },
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: ElevatedButton(

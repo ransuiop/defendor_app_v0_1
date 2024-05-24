@@ -12,10 +12,10 @@ import '../src/routes/home/learning/1punch/p_learning2.dart';
 import '../src/routes/home/learning/1punch/p_learning1.dart';
 import '../src/routes/home/learning/2kick/k_learning1.dart';
 import '../src/routes/home/learning/2kick/k_learning2.dart';
-import '../src/routes/home/learning/3chop/c_learning1.dart';
-import '../src/routes/home/learning/3chop/c_learning2.dart';
+// import '../src/routes/home/learning/3chop/c_learning1.dart';
+// import '../src/routes/home/learning/3chop/c_learning2.dart';
 import '../src/routes/home/_home_tab.dart';
-import '../src/routes/home/learning/_learning_chop_tab.dart';
+// import '../src/routes/home/learning/_learning_chop_tab.dart';
 import '../src/routes/home/learning/_learning_kick_tab.dart';
 import '../src/routes/home/learning/_learning_punch_tab.dart';
 import '../src/routes/home/learning/pose_detection_screen.dart';
@@ -156,12 +156,12 @@ class __HomeNavigatorState extends State<_HomeNavigator> {
                 return KTraining1();
               case '/kt2':
                 return KTraining2();
-              case '/block':
-                return LearningChopTab();
-              case '/ct1':
-                return CTraining1();
-              case '/ct2':
-                return CTraining2();
+              // case '/chop':
+              //   return LearningChopTab();
+              // case '/ct1':
+              //   return CTraining1();
+              // case '/ct2':
+              //   return CTraining2();
               case '/camera':
                 return PoseDetectionScreen();
               default:

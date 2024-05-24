@@ -4,11 +4,8 @@ import 'package:defendor_app_v0_1/config/navigation.dart';
 import 'package:defendor_app_v0_1/modules/providers/theme_provider.dart';
 import 'package:defendor_app_v0_1/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'firebase_options.dart';
 import 'modules/services/notification_service.dart';
 
 void main() async {
@@ -16,10 +13,6 @@ void main() async {
   await NotificationService.initializeNotifications();
   runApp(ProviderScope(child: Defendor()));
 }
-
-// TODO: IFGURE TF OUT THIS FIREBASE STORAGE SHIT (REFERENCES N SHI)
-final storage =
-    FirebaseStorage.instanceFor(bucket: 'gs://initvideodatabase.appspot.com');
 
 class Defendor extends StatefulWidget {
   const Defendor({super.key, bool? isFirstLaunch});
@@ -46,10 +39,4 @@ class _DefendorState extends State<Defendor> {
       },
     );
   }
-}
-
-initializeFirebase() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 }

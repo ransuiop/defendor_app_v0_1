@@ -8,26 +8,26 @@ import '../../../utils/theme/typography.dart';
 class NotifSett extends StatelessWidget {
   const NotifSett({super.key});
 
-  static List notifSections = ["Types", "<placeSection>", "<placeSection>"];
+  static List notifSections = ["<placeSection>", "<placeSection>", "<placeSection>"];
   static List notifTileIcons = [
     [Icon(Icons.notifications_active)],
     [Icon(Icons.remove_red_eye)],
     [Icon(Icons.home)]
   ];
   static List notifTileTitles = [
-    ["Reminders"],
+    ["<placeSection>"],
     ["<placeTitle>"],
     ["<placeTitle>"]
   ];
   static List notifTileSubtitles = [
-    ["Daily practice reminders and reminders,\nin general"],
-    ["<value>"],
+    ["<placeSection>"],
+    ["<placeSection>"],
     ["<value>"]
   ];
   static List notifSettRoutes = [
-    ['/notif_rem_sett'],
-    ['/'],
-    ['/']
+    ['placeholder'],
+    ['place'],
+    ['holder']
   ];
 
   @override

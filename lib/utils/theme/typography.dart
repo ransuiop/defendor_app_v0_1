@@ -41,6 +41,31 @@ class DTypography {
     fontWeight: FontWeight.normal,
   );
 
+  static TextStyle defStylightConstructHeader = TextStyle(
+    color: defDBlu,
+    fontSize: 24,
+    fontFamily: 'Metropolis',
+    fontWeight: FontWeight.bold,
+  );
+  static TextStyle defStydarkConstructHeader = TextStyle(
+    color: defXWht,
+    fontSize: 24,
+    fontFamily: 'Metropolis',
+    fontWeight: FontWeight.bold,
+  );
+  static TextStyle defStylightConstructSub = TextStyle(
+    color: defDBlu,
+    fontSize: 16,
+    fontFamily: 'Metropolis',
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle defStydarkConstructSub = TextStyle(
+    color: defXWht,
+    fontSize: 16,
+    fontFamily: 'Metropolis',
+    fontWeight: FontWeight.w500,
+  );
+
   // Home
   static TextStyle defStylightBottomAppBar = TextStyle(
     color: defWht,
@@ -188,6 +213,19 @@ class DTypography {
     color: defWht,
     fontFamily: 'Metropolis',
     fontWeight: FontWeight.w200,
+  );
+
+  static TextStyle defStylightAboutHeader = TextStyle(
+    color: defDBlu,
+    fontSize: 30,
+    fontFamily: 'Metropolis',
+    fontWeight: FontWeight.bold,
+  );
+  static TextStyle defStydarkAboutHeader = TextStyle(
+    color: defWht,
+    fontSize: 30,
+    fontFamily: 'Metropolis',
+    fontWeight: FontWeight.bold,
   );
 
   // Learning

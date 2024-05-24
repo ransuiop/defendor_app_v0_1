@@ -11,8 +11,8 @@ import '../../../../utils/theme/typography.dart';
 class LearningChopTab extends ConsumerWidget {
   const LearningChopTab({super.key});
 
-  static List chopTechniques = ['/ct1', '/ct2'];
-  static List chopTechniquesName = ['L. CHOP', 'R. CHOP'];
+  static List chopTechniques = ['/ct2'];
+  static List chopTechniquesName = ['R. CHOP'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

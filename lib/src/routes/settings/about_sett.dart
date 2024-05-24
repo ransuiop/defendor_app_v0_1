@@ -1,78 +1,152 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-// TODO: about sett CHANGE VALUES AND HEADERS (+ STYLES AND FORMATTING)
-import 'package:defendor_app_v0_1/utils/widgets/settings/sett_app_bar.dart';
+
+import 'package:defendor_app_v0_1/modules/providers/theme_provider.dart';
+import 'package:defendor_app_v0_1/utils/theme/typography.dart';
+import 'package:defendor_app_v0_1/utils/widgets/omni/omni_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../utils/theme/typography.dart';
-
-class AboutSett extends StatelessWidget {
+class AboutSett extends ConsumerWidget {
   const AboutSett({super.key});
 
-  static List genSections = ["Display", "Accessibility", "Preferences"];
-  static List genTileIcons = [
-    [Icon(Icons.palette)],
-    [Icon(Icons.remove_red_eye)],
-    [Icon(Icons.home), Icon(Icons.campaign)],
-  ];
-  static List genTileTitles = [
-    ["Theme"],
-    ["Colorblind mode"],
-    ["Default tab", "Feedback and corrections"]
-  ];
-  static List genTileSubtitles = [
-    ["<value>"],
-    ["<value>"],
-    ["<value>", "<value>"]
-  ];
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeState = ref.read(appThemeStateNotifier);
+
     return Scaffold(
-        appBar: DSettAppBar(tabName: "About"),
-        body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            physics: AlwaysScrollableScrollPhysics(),
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: genSections.length,
-                  itemBuilder: ((context, sectionI) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 14.0),
-                      child: Column(
-                        children: [
-                          Theme(
-                            data: ThemeData(),
-                            child: ListTile(
-                              title: Text(
-                                genSections[sectionI],
-                                textAlign: TextAlign.left,
-                                style: DTypography.defStySettSection,
-                              ),
-                            ),
-                          ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: genTileIcons[sectionI].length,
-                            itemBuilder: ((context, deetsI) {
-                              return ListTile(
-                                leading: genTileIcons[sectionI][deetsI],
-                                title: Text(
-                                  genTileTitles[sectionI][deetsI],
-                                  textAlign: TextAlign.left,
-                                ),
-                                subtitle: Text(
-                                  genTileSubtitles[sectionI][deetsI],
-                                  textAlign: TextAlign.left,
-                                ),
-                              );
-                            }),
-                          )
-                        ],
+      appBar: DOmniAppBar(tabName: ''),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              themeState.isDarkModeEnabled
+                  ? Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ColorFiltered(
+                        colorFilter:
+                            ColorFilter.mode(Colors.white, BlendMode.multiply),
+                        child: Image.asset(
+                          'assets/images/_Logo/defendorIcon.png',
+                          scale: 1.1,
+                        ),
                       ),
-                    );
-                  }),
-                ))));
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Image.asset(
+                        'assets/images/_Logo/defendorIcon.png',
+                        scale: 1.1,
+                      ),
+                    ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: Text(
+                      'DEFENDOR',
+                      style: themeState.isDarkModeEnabled
+                          ? DTypography.defStydarkAboutHeader
+                          : DTypography.defStylightAboutHeader,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: Text(
+                      'MediaPipe-based Mobile\nApplication for\nSelf-Defense Instruction',
+                      style: themeState.isDarkModeEnabled
+                          ? DTypography.defStydarkTrainingDesc
+                          : DTypography.defStylightTrainingDesc,
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Developed by',
+              style: themeState.isDarkModeEnabled
+                  ? DTypography.defStydarkSettTilesTitle
+                  : DTypography.defStylightSettTilesTitle,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Column(
+              children: [
+                Text(
+                  'BALDEROSA, Rixel',
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkTrainingName
+                      : DTypography.defStylightTrainingName,
+                ),
+                Text(
+                  'Manuscript Writer',
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkSettTilesSubtitle
+                      : DTypography.defStylightSettTilesSubtitle,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Column(
+              children: [
+                Text(
+                  'DE CHAVEZ, Lance',
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkTrainingName
+                      : DTypography.defStylightTrainingName,
+                ),
+                Text(
+                  'UI/UX Designer',
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkSettTilesSubtitle
+                      : DTypography.defStylightSettTilesSubtitle,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Column(
+              children: [
+                Text(
+                  'ILAGAN, Vince',
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkTrainingName
+                      : DTypography.defStylightTrainingName,
+                ),
+                Text(
+                  'Backend Developer',
+                  style: themeState.isDarkModeEnabled
+                      ? DTypography.defStydarkSettTilesSubtitle
+                      : DTypography.defStylightSettTilesSubtitle,
+                ),
+              ],
+            ),
+          ),
+          Flexible(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 36.0),
+                child: Text(
+                  'Since 2023',
+                  style: themeState.isDarkModeEnabled
+                        ? DTypography.defStydarkSettTilesSubtitle
+                        : DTypography.defStylightSettTilesSubtitle,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

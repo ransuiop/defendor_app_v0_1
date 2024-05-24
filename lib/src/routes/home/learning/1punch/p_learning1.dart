@@ -26,7 +26,7 @@ class PTraining1 extends ConsumerWidget {
             child: Padding(
               padding: EdgeInsets.only(left: 16, top: 16),
               child: Text(
-                "Jab",
+                "Left Jab",
                 textAlign: TextAlign.left,
                 style: themeState.isDarkModeEnabled
                     ? DTypography.defStydarkTrainingName

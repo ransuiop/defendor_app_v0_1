@@ -10,18 +10,18 @@ import '../../../utils/widgets/omni/home_app_bar.dart';
 class HomeTab extends ConsumerWidget {
   const HomeTab({super.key});
 
-  static List categories = ['/punch', '/kick', '/block'];
+  static List categories = ['/punch', '/kick'];
   static List categoriesImgLight = [
     'assets/images/Punch/LPunch.png',
     'assets/images/Kick/LKick.png',
-    'assets/images/Chop/LChop.png'
+    // 'assets/images/Chop/LChop.png'
   ];
   static List categoriesImgDark = [
     'assets/images/Punch/DPunch.png',
     'assets/images/Kick/DKick.png',
-    'assets/images/Chop/DChop.png'
+    // 'assets/images/Chop/DChop.png'
   ];
-  static List categoriesName = ['PUNCHING', 'KICKING', 'CHOPPING'];
+  static List categoriesName = ['PUNCHING', 'KICKING'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
